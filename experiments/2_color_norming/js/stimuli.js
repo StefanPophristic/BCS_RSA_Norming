@@ -405,7 +405,7 @@ let allStimuli = [
 "colorScheme": 2
 },
 {
-"item": ["TV"],
+"item": ["tv"],
 "colorScheme": 2
 },
 {
