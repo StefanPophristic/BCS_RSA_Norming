@@ -113,9 +113,8 @@ function getArticleItem(item_id) {
         comments : $("#comments").val(),
 
         firstLanguage : $("#firstLanguage").val(),
+        bcsPrimaryLanguageSchool : $("#bcsPrimaryLanguageSchool").val(),
         otherLanguage : $("#otherLanguage").val(),
-        bcsPrimaryLanguageHome : $('input[name="bcsPrimaryLanguageHome"]:checked').val(),
-        bcsPrimaryLanguageSchool : $('input[name="bcsPrimaryLanguageSchool"]:checked').val(),
         liveInYugo : $("#liveInYugo").val(),
         country : $("#country").val(),
         dialectOne : $("#dialectOne").val(),
@@ -126,8 +125,7 @@ function getArticleItem(item_id) {
       // error if any of the questions in the second part are left unanswered
       if (exp.subj_data.firstLanguage != "" &
         exp.subj_data.otherLanguage != "" &
-        exp.subj_data.bcsPrimaryLanguageHome != null &
-        exp.subj_data.bcsPrimaryLanguageSchool != null &
+        exp.subj_data.bcsPrimaryLanguageSchool != "" &
         exp.subj_data.liveInYugo != "" &
         exp.subj_data.country != "" &
         exp.subj_data.dialectOne != "" &

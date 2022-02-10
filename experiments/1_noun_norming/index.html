@@ -100,7 +100,7 @@
     <!-- </table> -->
     <br><br>
     <button onclick="_s.button()">Nastavite</button>
-    <div class="err">Molimo vas odgovorite pre nego što nastavite. </div>
+    <div class="err">Molimo vas unesite odgovor pre nego što nastavite. </div>
      <!-- <br>
 	      <textarea id="objectlabel" rows="2" cols="50"></textarea>
      <br>  -->
@@ -113,10 +113,10 @@
 
   <div class="slide"  id="subj_info">
     <div class="long_form">
-      <div class="subj_info_title">Upitnik</div>
-      <p class="info" style="margin:0 0 0px 0;"><br>Molimo vas odgovorite na sledeći kratak upitnik.
-        <br>Prvi deo upitnika nije obavezan.
-        <br>Drugi deo upitnika je obavezan.
+      <div class="subj_info_title">Anketa</div>
+      <p class="info" style="margin:0 0 0px 0;"><br>Molimo vas odgovorite na sledeću anketu.
+        <br>Prvi deo ankete nije obavezan.
+        <br>Drugi deo ankete je obavezan.
       </p>
 
       <p style="color:#036; font-size:17; font-weight:bold"p>Prvi Deo</p>
@@ -126,7 +126,7 @@
           <label><option value=""/></label>
           <label><option value="Male"/>Muškog</label>
           <label><option value="Female"/>Ženskog</label>
-          <label><option value="Other"/>Drugi</label>
+          <label><option value="Other"/>Ostalo</label>
         </select>
       </p>
 
@@ -143,48 +143,37 @@
         </select>
       </p>
 
-      <p>Dali ste pažljivo pročitali uputstva i dali mislite da ste ispravno uradili eksperiment?</p>
+      <p>Da li ste pažljivo pročitali uputstva i da li mislite da ste ispravno uradili studiju?</p>
       <label><input type="radio"  name="assess" value="No"/>Ne</label>
       <label><input type="radio"  name="assess" value="Yes"/>Da</label>
       <label><input type="radio"  name="assess" value="Confused"/>Bio/la sam zbunjen/a</label>
 
-      <p>Dali ste pronašli bilo kakvih problema sa studijom? </p>
+      <p>Da li ste pronašli bilo kakvih problema sa studijom? </p>
       <textarea id="problems" rows="2" cols="50"></textarea>
 
-      <p>Da li mislite da je naknada za učestvovanje u eksperimentu bila poštena?</p>
+      <p>Da li mislite da je naknada za učestvovanje u studiji bila odgovarajuća?</p>
       <textarea id="fairprice" rows="1" cols="10"></textarea>
 
-      <p>Dali vam se svideo eksperiment?</p>
+      <p>Da li vam se svidela studija?</p>
       <select id="enjoyment">
         <label><option value="-1"></option></label>
-        <label><option value="0">Gori od prosečnog eksperimenta</option></label>
+        <label><option value="0">Lošiji od prosečnog eksperimenta</option></label>
         <label><option value="1" >Prosečan eksperiment</option></label>
         <label><option value="2">Bolji od prosečnog eksperimenta</option></label>
       </select>
 
-      <p>Ako imate bilo koje druge komentare u vezi sa eksperimentom, molimo vas recite nam ovde:</p>
+      <p>U polje ispod, unesite ostale komentare u vezi sa studijom. </p>
       <textarea id="comments" rows="3" cols="50"></textarea>
       <br/>
 
       <p style="color:#036; font-size:17; font-weight:bold">Drugi Deo</p>
 
-      <p>
-        BHS: BHS skraćenica se odnosi na Bosanski, Crnogorski, Hrvatski, Srpski, Hrvatsko-Srpski, Srpsko-Hrvatski.
-      </p>
+      <p>Dok ste odrastali, koji ste jezik (ili jezike) govorili u domaćinstvu/kućanstvu: <input type="text" id="firstLanguage"/></p>
 
-      <p>Koji su vam maternji jezici: <input type="text" id="firstLanguage"/></p>
-      <label>(Jezik/jezici koji su se govorili u domaćinstvu/kućanstvu dok ste odrastali)</label>
+      <p>Dok ste odrastali, da li ste govorili BHS kao primarni jezik u školi? <input type="text" id="bcsPrimaryLanguageSchool"/></p>
 
       <p>Koje druge jezike govorite: <input type="text" id="otherLanguage"/></p>
       <label>(Jezik/jezike koje ste naučili kao strane jezike)</label>
-
-      <p>Dok ste odrastali, da li ste govorili BHS kao primarni jezik kod kuće?</p>
-      <label><input type="radio"  name="bcsPrimaryLanguageHome" value="No"/>Ne</label>
-      <label><input type="radio"  name="bcsPrimaryLanguageHome" value="Yes"/>Da</label>
-
-      <p>Dok ste odrastali, da li ste govorili BHS kao primarni jezik u školi?</p>
-      <label><input type="radio"  name="bcsPrimaryLanguageSchool" value="No"/>Ne</label>
-      <label><input type="radio"  name="bcsPrimaryLanguageSchool" value="Yes"/>Da</label>
 
       <p>Da li ste ikada živeli u zemlji bivše Jugoslavije?
         <br>
@@ -212,21 +201,23 @@
         </select>
       </p>
 
-      <p>Kada koristim maternji oblik BHS-a ja bih rekao/la:
+      <p>Kada koristim maternji oblik svog jezika ja bih rekao/la:
         <select id="dialectOne">
           <label><option value=""/></label>
           <label><option value="ekavica"/>Lepo</label>
           <label><option value="ikavica"/>Lipo</label>
           <label><option value="ijekavica"/>Lijepo</label>
+          <label><option value="other"/>Nešto drugo</label>
         </select>
       </p>
 
-      <p>Kada koristim maternji oblik BHS-a ja bih rekao/la:
+      <p>Kada koristim maternji oblik svog jezika ja bih rekao/la:
         <select id="dialectTwo">
           <label><option value=""/></label>
           <label><option value="štokavski"/>Što/šta</label>
           <label><option value="čakavski"/>Ča/zač</label>
           <label><option value="kajkavski"/>Kaj</label>
+          <label><option value="other"/>Nešto drugo</label>
         </select>
       </p>
 
