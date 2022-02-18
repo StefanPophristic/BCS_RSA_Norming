@@ -4,7 +4,6 @@
 library(tidyverse)
 theme_set(theme_bw())
 
-
 ###############
 # Take in data frame and count utterances for each color_object pairing
 #
