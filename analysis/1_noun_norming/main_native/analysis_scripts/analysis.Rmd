@@ -1,13 +1,14 @@
 ---
-title: "Perceptual Difficulty - Norming for Namability"
-output: rmarkdown::github_document
+title: "BCS_RSA_Noun_Norming_Native"
+output: pdf_document
+#rmarkdown::github_document
 #output:
   #html_document: default
   #pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning= FALSE, message = FALSE, echo = TRUE)
 ```
 
 ```{r data import, include=FALSE}
@@ -168,9 +169,12 @@ I am currently working on:
 lapply(names(df_split), makePlots)
 ```
 
-```{r output, echo=FALSE}
-library(rmarkdown)
-render("analysis.Rmd", "pdf_document")
+```{r output, include = FALSE}
+#rmarkdown::render()
+# library(rmarkdown)
+# 
+# render("analysis.Rmd", "pdf_document")
+
 ```
 
 

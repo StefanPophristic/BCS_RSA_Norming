@@ -40,6 +40,11 @@ runAnalysis <- function(dataframe) {
   
   df$cresponse = str_to_lower(gsub(" ", "", df$response))
   df$cresponse = str_to_lower(gsub("\n", "", df$cresponse))
+  df$cresponse = gsub("č", "c", df$cresponse)
+  df$cresponse = gsub("ć", "c", df$cresponse)
+  df$cresponse = gsub("š", "s", df$cresponse)
+  df$cresponse = gsub("ž", "z", df$cresponse)
+  df$cresponse = gsub("đ", "dj", df$cresponse)
   
   responsesNative = df %>%
     #filter(status == "native") %>%
