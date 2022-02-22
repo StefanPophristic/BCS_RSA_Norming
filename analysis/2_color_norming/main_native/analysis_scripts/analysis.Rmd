@@ -18,68 +18,235 @@ library(stringi)
 theme_set(theme_bw())
 
 source("../../../shared/analysis.R")
+
 df = read.csv("../data/2_color_norming_main-merged_cleaned.csv", header = TRUE)
 
-df$response = str_to_lower(df$response)
-
-####### GET RID OF ALL THINGS THAT ARE NOT LETTERS!!!
-######### GET RID OF ALL SPACES
-
-# recode all color words:
-df$response = gsub("narancast", "narandzasto", df$response)
-df$response = gsub("narancaste", "narandzasto", df$response)
-df$response = gsub("narančasto", "narandzasto", df$response)
-
-df$response = gsub("\plava", "plavo", df$response)
-
-df$response = gsub("bela", "belo", df$response)
-df$response = gsub("bele", "belo", df$response)
-df$response = gsub("beli", "belo", df$response)
-df$response = gsub("bije;a", "belo", df$response)
-df$response = gsub("bijea", "belo", df$response)
-df$response = gsub("bijel", "belo", df$response)
-df$response = gsub("bijela", "belo", df$response)
-df$response = gsub("bijele", "belo", df$response)
-df$response = gsub("bijeli", "belo", df$response)
-df$response = gsub("bijelo", "belo", df$response)
-df$response = gsub("bijrla", "belo", df$response)
-df$response = gsub("biojele", "belo", df$response)
-df$response = gsub("bjeal", "belo", df$response)
-df$response = gsub("bjel", "belo", df$response)
-df$response = gsub("bjela", "belo", df$response)
-df$response = gsub("bjel", "belo", df$response)
-df$response = gsub("bjeli", "belo", df$response)
-
-# BEWARE
-# this will replace "bijela" with "beloa" becuase the rule "bijel" --> "belo" will apply first
-# you want a function that only replaces full strings
+df$response = tolower(df$response)
 
 
+# ####### GET RID OF ALL THINGS THAT ARE NOT LETTERS!!!
+df$response = str_replace_all(df$response, "/", "")
+df$response = str_replace_all(df$response, "\\\\", "")
+df$response = str_replace_all(df$response, ";", "")
+df$response = str_replace_all(df$response, "\'", "")
+df$response = str_replace_all(df$response, "<", "")
+df$response = str_replace_all(df$response, "\n", "")
+df$response = str_replace_all(df$response, " ", "")
+df$response = str_replace_all(df$response, "\\?", "")
+
+# Replace all single word color responses with a standardized color label
+
+df$response = str_replace_all(df$response, "bela\\b", "belo")
+df$response = str_replace_all(df$response, "bele\\b", "belo")
+df$response = str_replace_all(df$response, "beli\\b", "belo")
+df$response = str_replace_all(df$response, "bije;a\\b", "belo")
+df$response = str_replace_all(df$response, "bijea\\b", "belo")
+df$response = str_replace_all(df$response, "bijel\\b", "belo")
+df$response = str_replace_all(df$response, "bijela\\b", "belo")
+df$response = str_replace_all(df$response, "bijele\\b", "belo")
+df$response = str_replace_all(df$response, "bijeli\\b", "belo")
+df$response = str_replace_all(df$response, "bijelo\\b", "belo")
+df$response = str_replace_all(df$response, "bijrla\\b", "belo")
+df$response = str_replace_all(df$response, "biojele\\b", "belo")
+df$response = str_replace_all(df$response, "bjeal\\b", "belo")
+df$response = str_replace_all(df$response, "bjel\\b", "belo")
+df$response = str_replace_all(df$response, "bjela\\b", "belo")
+df$response = str_replace_all(df$response, "bjel\\b", "belo")
+df$response = str_replace_all(df$response, "bjelo\\b", "belo")
+df$response = str_replace_all(df$response, "bjeli\\b", "belo")
+df$response = str_replace_all(df$response, "bijelo\\b", "belo")
+
+df$response = str_replace_all(df$response, "cne\\b", "crno")
+df$response = str_replace_all(df$response, "cren\\b", "crno")
+df$response = str_replace_all(df$response, "crn\\b", "crno")
+df$response = str_replace_all(df$response, "crna\\b", "crno")
+df$response = str_replace_all(df$response, "crne\\b", "crno")
+df$response = str_replace_all(df$response, "crni\\b", "crno")
+df$response = str_replace_all(df$response, "crnq\\b", "crno")
+
+df$response = str_replace_all(df$response, "crven\\b", "crveno")
+df$response = str_replace_all(df$response, "crneven\\b", "crveno")
+df$response = str_replace_all(df$response, "crvena\\b", "crveno")
+df$response = str_replace_all(df$response, "crvene\\b", "crveno")
+df$response = str_replace_all(df$response, "crveni\\b", "crveno")
+df$response = str_replace_all(df$response, "cvene\\b", "crveno")
+df$response = str_replace_all(df$response, "crvani\\b", "crveno")
+df$response = str_replace_all(df$response, "crvreni\\b", "crveno")
+df$response = str_replace_all(df$response, "crvr\\b", "crveno")
+
+df$response = str_replace_all(df$response, "jubicasti\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicaaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasa\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicaset\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasrte\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicast\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičast\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasta\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičastaa\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasti\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičasti\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičasto\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičastta\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubiccaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicsra\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicsti\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubivasto\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "Ljuicaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljuvičaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasna\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasno\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubičasta\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljuvičaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicastno\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicast\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubicasye\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljubocasta\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "ljuicaste\\b", "ljubicasto")
+df$response = str_replace_all(df$response, "lljubicasto\\b", "ljubicasto")
+
+df$response = str_replace_all(df$response, "naradjanska\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naradzan\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naradzanska\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naradzasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naranasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "Narancaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančaste boje\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancasti\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančasti\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naranđasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandjanska\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandjast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandžasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzasti\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "naranzdaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narnčasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "nrandzasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "nrandzaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančasteboje\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandasta\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandasti\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandjasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandžaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzastno\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narandzasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narndjasto\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narndzaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancast\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narancaste\\b", "narandzasto")
+df$response = str_replace_all(df$response, "narančasto\\b", "narandzasto")
+
+df$response = str_replace_all(df$response, "plaava\\b", "plavo")
+df$response = str_replace_all(df$response, "place\\b", "plavo")
+df$response = str_replace_all(df$response, "placve\\b", "plavo")
+df$response = str_replace_all(df$response, "plav\\b", "plavo")
+df$response = str_replace_all(df$response, "plava\\b", "plavo")
+df$response = str_replace_all(df$response, "plave\\b", "plavo")
+df$response = str_replace_all(df$response, "plavel\\b", "plavo")
+df$response = str_replace_all(df$response, "plavi\\b", "plavo")
+
+df$response = str_replace_all(df$response, "siv\\b", "sivo")
+df$response = str_replace_all(df$response, "siva\\b", "sivo")
+df$response = str_replace_all(df$response, "sive\\b", "sivo")
+df$response = str_replace_all(df$response, "sivi\\b", "sivo")
+
+df$response = str_replace_all(df$response, "smeda\\b", "smedje")
+df$response = str_replace_all(df$response, "smeđa\\b", "smedje")
+df$response = str_replace_all(df$response, "smede\\b", "smedje")
+df$response = str_replace_all(df$response, "smeđe\\b", "smedje")
+df$response = str_replace_all(df$response, "smeđe4\\b", "smedje")
+df$response = str_replace_all(df$response, "smedi\\b", "smedje")
+df$response = str_replace_all(df$response, "smeđi\\b", "smedje")
+df$response = str_replace_all(df$response, "smedja\\b", "smedje")
+df$response = str_replace_all(df$response, "smedjje\\b", "smedje")
+df$response = str_replace_all(df$response, "zmedje\\b", "smedje")
 
 
-#get rid of word final vowels
-# participants wrote the color adjective as agreeing with different words 
-# (i.e. the noun of the object or the word "color" itself)
-# so this will group similar words
+df$response = str_replace_all(df$response, "srebrena\\b", "srebrno")
+df$response = str_replace_all(df$response, "srebrn\\b", "srebrno")
+df$response = str_replace_all(df$response, "srebrna\\b", "srebrno")
+df$response = str_replace_all(df$response, "srebrne\\b", "srebrno")
+df$response = str_replace_all(df$response, "srebrni\\b", "srebrno")
 
-# Function that removes the last character of a string
-# only if the last character is a vowel
-removeLastChar <- function(str) {
-  str <- toString(str)
-  lastChar <- stri_sub(str, -1)
-  if (lastChar == "a" |
-      lastChar == "e" |
-      lastChar == "i" |
-      lastChar == "o" |
-      lastChar == "u") {
-    return (substr(str, 1, nchar(str)-1))
-  } else {
-    return(str)
-  }
-}
 
+df$response = str_replace_all(df$response, "yelen\\b", "zeleno")
+df$response = str_replace_all(df$response, "yelena\\b", "zeleno")
+df$response = str_replace_all(df$response, "yeleno\\b", "zeleno")
+df$response = str_replace_all(df$response, "zalen\\b", "zeleno")
+df$response = str_replace_all(df$response, "zaleni\\b", "zeleno")
+df$response = str_replace_all(df$response, "zaleno\\b", "zeleno")
+df$response = str_replace_all(df$response, "zalemna", "zeleno")
+df$response = str_replace_all(df$response, "zelen\\b", "zeleno")
+df$response = str_replace_all(df$response, "zelena\\b", "zeleno")
+df$response = str_replace_all(df$response, "zelene\\b", "zeleno")
+df$response = str_replace_all(df$response, "zeleni\\b", "zeleno")
+
+df$response = str_replace_all(df$response, "zlatna\\b", "zlatno")
+df$response = str_replace_all(df$response, "zlatne\\b", "zlatno")
+df$response = str_replace_all(df$response, "zlatni\\b", "zlatno")
+
+df$response = str_replace_all(df$response, "zut\\b", "zuto")
+df$response = str_replace_all(df$response, "žut\\b", "zuto")
+df$response = str_replace_all(df$response, "zuta\\b", "zuto")
+df$response = str_replace_all(df$response, "žuta\\b", "zuto")
+df$response = str_replace_all(df$response, "žutaa\\b", "zuto")
+df$response = str_replace_all(df$response, "žutal\\b", "zuto")
+df$response = str_replace_all(df$response, "zute\\b", "zuto")
+df$response = str_replace_all(df$response, "žute\\b", "zuto")
+df$response = str_replace_all(df$response, "zuteboje\\b", "zuto")
+df$response = str_replace_all(df$response, "žuteboje\\b", "zuto")
+df$response = str_replace_all(df$response, "zuti\\b", "zuto")
+df$response = str_replace_all(df$response, "žuti\\b", "zuto")
+df$response = str_replace_all(df$response, "zuto\\b", "zuto")
+df$response = str_replace_all(df$response, "žuto\\b", "zuto")
+df$response = str_replace_all(df$response, "zutra\\b", "zuto")
+
+df$response = str_replace_all(df$response, "\n", "")
+df$response = str_replace_all(df$response, " ", "")
+
+subjectCleanUp <- df %>%
+  select(workerid, schoolLanguage, firstLanguage, status) %>%
+  unique()
+
+view(subjectCleanUp)
+
+
+# These are the statuses that were coded incorrectly:
+# 165 <- native
+# 151 <- native
+# 155 <- native
+# 244 <- heritage
+# these incorrect codings are due to spelling errors and 
+# listing two or more languages split up by / rather than spaces and commas
+
+
+# Manually input them into the dataframe
+df$status[df$workerid == 165] <- "native"
+df$status[df$workerid == 151] <- "native"
+df$status[df$workerid == 155] <- "native"
+df$status[df$workerid == 244] <- "heritage"
+
+# Get rid of participant 193 (answered the object names rather than colors)
 df <- df %>%
-  mutate(response = sapply(df$response, removeLastChar))
+  filter(workerid != 193)
 
 df_split <- runAnalysis(df)
 
@@ -210,26 +377,15 @@ plot_dialectCountry
 ```
 
 
+
+# Colors
+A quick reference guide to colors in BCS. The longer responses are often compounds of multiple colors.
+
+![alt text here](../../../shared/colors.jpg)
+
 # Participant Responses
 
-Responses that participants gave to the question "What is this object called?" are given below. Each graph is faceted based on the color the object was presented in.   
-
-There are several things that need to be cleaned up in these graphs but please keep the following things in mind:
-1. Some participants could not answer with 3 letter words. Therefore, if one of the top answers was a three letter word, take the rest of the answers with a grain of salt
-2. Some participants used the diacritics š, č, ć, ž, or đ, whereas others did not. This may make the answers seem less consistent than they actually are.
-3. Different spellings of the same word or a word with spelling errors are categorized as different answers
-
-
-The answers will be classified in the following ways:
-1. Consistent labelling  
-2. Dialect consistent labelling with one gender  
-3. Dialect consistent labelling with two or more genders  
-4. Inconsistent labelling  
-  
-  
-I am currently working on:  
-- getting rid of diacritics all across the board
-- classifying the answers according to the four cateogries listed above
+Responses that participants gave to the question "What is the color of this object?" are given below. Each graph is faceted based on the color the object was presented in. 
   
 
 ```{r objects, echo=FALSE}

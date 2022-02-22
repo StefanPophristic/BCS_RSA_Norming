@@ -1,14 +1,46 @@
-
 ###
+# participant_status.py
+# BCS RSA Norming Studies
+# Stefan Pophristic
 #
+# Program that returns a csv file with a new column determining participant status
+#   (how their exposure to BCS should be classified in the analysis)
 #
+# INPUT:
+# # Argument 1: Path from this file to the  -merged.csv file with the data
+# #             ../1_noun_norming/main_native/data/1_noun_norming_main-merged.csv
+# #        or   ../2_color_norming/main_native/data/2_color_norming_main-merged.csv ../
+# #
+# # Argument 2: Path from this file to where the original csv file is, and a new
+# #           name for the edited csv file
+# #            ../1_noun_norming/main_native/data/1_noun_norming_main-merged_cleaned.csv
+# #            ../2_color_norming/main_native/data/2_color_norming_main-merged_cleaned.csv
 #
+# OUTPUT:
+# # Return csv file with new column which includes participant status which is
+# #   native: native speaker
+# #   heritage: heritage speaker
+# #   simk: Slovenian or Macedonian who speaks BCS
+# #  foreign: non-native speaker of BCS
 #
-# Return data frame with new column which includes participant status which is
-#   native: native speaker
-#   heritage: heritage speaker
-#   simk: Slovenian or Macedonian who speaks BCS
-#   foreign: non-native speaker of BCS
+# Partipant status is determined as follows:
+# #   native: language spoken at home growing up and at school are both BCS
+# #   heritage: language spoken at home growing up is BCS, language spoken at
+# #             school growing up is not BCS
+# #   simk: The country the participant reported as having spent most time in is
+# #         either Slovenia or Macedonia, regardless of what they reported as
+# #         language spoken at home or school
+# #  foreign: language spoken at school and at home does not include BCS
+#
+# To run this program, navigate to this file in terminal, then run:
+# python participant_status.py argument1 argument2
+#
+# Other notes:
+# This program does not account for spelling errors nor languages written using a /.
+#  so for example a participant that writes { firstLanguage:Serrrbian,
+#  schoolLanguage: Serbian/Croatian) will be counted as a foreign rather than native
+#  speaker. These errors are manually corrected for in the analysis R scripts.
+
 
 import sys
 import pandas as pd
@@ -34,9 +66,7 @@ firstLanguageArray = []
 schoolLanguageArray = []
 otherLanguageArray = []
 
-# Add the values from the dataframe to the arrays, splitting all answers up by
-# spaces
-#MAKE SURE THAT YOU GET INDEXING RIGHT!!!!!!!!!!!!!!!!!!
+# Add the values from the dataframe to the arrays, splitting all answers up by spaces
 for x in range(len(df)) :
     firstLanguageArray.append(df.at[x, 'firstLanguage'].split())
     schoolLanguageArray.append(df.at[x, 'schoolLanguage'].split())
@@ -66,7 +96,6 @@ for x in range(len(df)) :
         statusArray.append("foreign")
 
 # Add status Array to dataframe
-
 df = df.assign(status = statusArray)
 
 df.to_csv(str(sys.argv[2]))

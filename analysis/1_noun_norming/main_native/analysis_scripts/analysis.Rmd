@@ -18,6 +18,32 @@ theme_set(theme_bw())
 source("../../../shared/analysis.R")
 df = read.csv("../data/1_noun_norming_main-merged_cleaned.csv", header = TRUE)
 
+subjectCleanUp <- df %>%
+  select(workerid, schoolLanguage, firstLanguage, status) %>%
+  unique()
+
+view(subjectCleanUp)
+
+# These are the statuses that were coded incorrectly:
+# 272 is heritage
+# 248 is native
+# 241 is heritage
+# 152 is native
+# 169 is native
+# 262 is native
+# 154 is native
+# these incorrect codings are due to spelling errors and 
+# listing two or more languages split up by / rather than spaces and commas
+
+# Manually input them into the dataframe
+df$status[df$workerid == 272] <- "heritage"
+df$status[df$workerid == 248] <- "native"
+df$status[df$workerid == 241] <- "heritage"
+df$status[df$workerid == 152] <- "native"
+df$status[df$workerid == 169] <- "native"
+df$status[df$workerid == 262] <- "native"
+df$status[df$workerid == 154] <- "native"
+
 df_split <- runAnalysis(df)
 
 makePlots <- function(objectName) {
@@ -150,19 +176,6 @@ There are several things that need to be cleaned up in these graphs but please k
 1. Some participants could not answer with 3 letter words. Therefore, if one of the top answers was a three letter word, take the rest of the answers with a grain of salt
 2. Some participants used the diacritics š, č, ć, ž, or đ, whereas others did not. This may make the answers seem less consistent than they actually are.
 3. Different spellings of the same word or a word with spelling errors are categorized as different answers
-
-
-The answers will be classified in the following ways:
-1. Consistent labelling  
-2. Dialect consistent labelling with one gender  
-3. Dialect consistent labelling with two or more genders  
-4. Inconsistent labelling  
-  
-  
-I am currently working on:  
-- getting rid of diacritics all across the board
-- classifying the answers according to the four cateogries listed above
-  
 
 
 ```{r objects, echo=FALSE}
